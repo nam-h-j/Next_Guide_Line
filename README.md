@@ -37,7 +37,7 @@ Project
 - 배포
   - Jenkins의 파이프라인 스크립트 실행으로 배포
   
-  ```
+  ```bash
   //파이프라인 스크립트
   pipeline {
     agent any
@@ -73,7 +73,7 @@ Project
         }
     }
 }  
-  ```
+```
   
 - BRANCH_NAME : 배포할 브랜치 명(젠킨스에 커넥션 설정된 깃을 기준으로 함)
 - CREDENTIAL_ID : 젠킨스에 설정한 깃 권한 아이디를 입력
