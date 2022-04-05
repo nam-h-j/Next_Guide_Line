@@ -228,7 +228,7 @@ import store from '../store/createStore'
 import DefaultLayout from '../components/layouts/DefaultLayout'
 import CommonStateLoader from '../components/layouts/CommonStateLoader'
 
-const HangeApp = ({ Component, pageProps }: AppProps): JSX.Element => {
+const MyApp = ({ Component, pageProps }: AppProps): JSX.Element => {
   return (
     <Provider store={store}>
       <DefaultLayout>
@@ -238,7 +238,7 @@ const HangeApp = ({ Component, pageProps }: AppProps): JSX.Element => {
     </Provider>
   )
 }
-export default HangeApp"
+export default MyApp"
 ```
 
 - \_app.tsx 를 구성하는 컴포넌트
