@@ -55,7 +55,7 @@ Project
         }
         stage('build') {
             steps {
-                    dir('hange-app'){
+                    dir('myapp'){
                         sh 'ls -al'
                         sh "npm install"
                         sh "${BUILD_SCIRIPT}"
