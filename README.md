@@ -36,6 +36,7 @@ Project
   - npm run build_[배포환경]
 - 배포
   - Jenkins의 파이프라인 스크립트 실행으로 배포
+  
   ```
   //파이프라인 스크립트
   pipeline {
@@ -73,12 +74,14 @@ Project
     }
 }  
   ```
+  
 - BRANCH_NAME : 배포할 브랜치 명(젠킨스에 커넥션 설정된 깃을 기준으로 함)
 - CREDENTIAL_ID : 젠킨스에 설정한 깃 권한 아이디를 입력
 - GIT_REPOSITORY_URL : 레포지토리의 url(@git:으로 시작하는)
 - BUILD_SCIRIPT : 프로젝트 빌드 스크립트
 - JOB_PATH : 배포 파일위치
 - S3_BUCKET_NAME : 배포 할 s3 버킷 이름
+
 ---
 
 # React Component Guideline
