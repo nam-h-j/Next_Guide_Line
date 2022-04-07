@@ -22,12 +22,11 @@ Project
 └──
 ```
 
----
+***
 
 ## Build, Deploy
 
 - 로컬환경빌드
-
   1. npm run dev
   1. localhost:3000에서 확인
 
@@ -37,7 +36,7 @@ Project
 - 배포
   - Jenkins의 파이프라인 스크립트 실행으로 배포
   
-  ```bash
+```bash
   //파이프라인 스크립트
   pipeline {
     agent any
