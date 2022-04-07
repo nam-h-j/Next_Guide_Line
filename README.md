@@ -238,7 +238,7 @@ const MyApp = ({ Component, pageProps }: AppProps): JSX.Element => {
     </Provider>
   )
 }
-export default MyApp"
+export default MyApp
 ```
 
 - \_app.tsx 를 구성하는 컴포넌트
@@ -257,8 +257,7 @@ export default MyApp"
 
   4.  CommonStateLoader
 
-  - 모든 페이지에서 최초 로드시 변경해야하는 상태들을 모아두는 컴포넌트 입니다.
-  - 
+  - 모든 페이지에서 최초 로드시 변경해야하는 상태 작업들을 작성하는 컴포넌트 입니다.
 ---
 
 ## \_document.tsx
@@ -267,6 +266,12 @@ export default MyApp"
 - <link/>와<script/>요소만 작성합니다.
 - 예) 파비콘, 웹폰트, 외부 js소스 등
 
----
+***
   
 ## DefaultLayout.tsx
+- 가장 상위 컴포넌트로, 모든 페이지에서 공통적으로 사용하는 상태, 로직, 컴포넌트를 불러옵니다.
+- 공통헤더, 푸터, 모달영역 등을 불러옵니다
+- 공통으로 사용하는 상태값을 불러옵니다.
+- <head>의 meta, title 정보를 작성합니다.
+
+ 
