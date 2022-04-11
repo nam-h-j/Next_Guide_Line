@@ -323,7 +323,9 @@ export default MyApp;
 - 최대한 Module CSS로 처리해서 되도록 사용하지 않는 방향으로 작성한다.
 
 ```js
-// css-in-js_example.tsx
+// css-in-js_example
+
+// Define
 export const HtmlPageHeight = (heightProp: string): JSX.Element => (
   <style global jsx>{`
     .indexPage {
@@ -335,7 +337,6 @@ export const HtmlPageHeight = (heightProp: string): JSX.Element => (
     }
   `}</style>
 );
-//
 export const HtmlScrollHidden = (overflowProp: string): JSX.Element => (
   <style global jsx>{`
     body {
@@ -346,6 +347,7 @@ export const HtmlScrollHidden = (overflowProp: string): JSX.Element => (
 
 // how to use
 import { HtmlPageHeight } from "../externalCSS";
+
 const SomeComponentNeedsCssToJS = (): JSX.Element => {
   return{
     <>
