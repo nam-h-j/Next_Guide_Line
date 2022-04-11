@@ -10,7 +10,11 @@
   - [\_app.tsx](#apptsx)
   - [\_document.tsx](#documenttsx)
   - [DefaultLayout.tsx](#defaultlayouttsx)
-- [Style Sheet]
+- [Style Sheet](#style-sheet)
+  - [Module CSS](#module-css)
+  - [css-in-js](#css-in-js)
+- [Type](#type)
+  - [초기화](#초기화)
 - [Redux Guideline](#redux-guideline)
 
 # Next.js 가이드라인
@@ -29,8 +33,9 @@ Project
 │   │  └─Modules -- header, footer, listItem ...
 │   ├─pages(_app.tsx, _document.tsx, 404페이지, 점검페이지, 앱의 각 페이지)
 │   ├─scss(공통 scss(mixin)등을 정의)
-│   └─store(리덕스 관련 파일)
-│      └─slice
+│   ├─store(리덕스 관련 파일)
+│   │  └─slice
+│   └─types(상태나 api요청에서 가져오는 데이터의 타입을 정의)
 └──
 ```
 
@@ -357,8 +362,73 @@ const SomeComponentNeedsCssToJS = (): JSX.Element => {
 };
 ```
 
+---
+
+## Type
+
+- 데이터 관련한 타입을 별도로 관리한다.
+- 요청하는 API데이터 이름뒤에 Type를 붙여서 명명한다.
+- 타입 이름은 파스칼케이스, 속성은 카멜케이스를 사용한다.
+
+### 초기화
+
+- 각 타입에 대한 초기화된 상태도 해당 파일 내에서 작성한다.
+- init + 데이터명 으로 명명한다
+- 카멜케이스로 작성한다.
+
+```js
+
+export type UserType = {
+  userIndex: string
+  userName: string
+  gender: string
+  age: number
+}
+
+const initUser: UserType = {
+  userIndex: "USER001"
+  userName: "Bruce"
+  gender: "Male"
+  age: 30
+};
+
+export type UserStateType = {
+  userInfo : UserType
+  isLogin : boolean
+  DarkMode : boolean
+}
+
+const initUserState: UserStateType = {
+  userInfo: initUser
+  isLogin: false
+  DarkMode: false
+};
+
+```
+
 ## Redux Guideline
 
 - Redux toolkit을 사용한다
+- 페이지 별로 Slice를 나눠서 작성한다.
+- 각 슬라이스는 상태 정의, 리듀서, 액션 순으로 작성한다.
+
+### 초기화
+
+- init + 페이지명 + State로 명명한다
+- 카멜케이스로 작성한다.
+
+```js
+import UserType from "../types";
+const initUserState: UserStateType = {
+  userIndex: "USER001"
+  userName: "Bruce"
+  gender: "Male"
+  age: 30
+};
+```
+
+### Slice
+
+-
 
 ## Api
