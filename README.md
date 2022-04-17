@@ -1,5 +1,6 @@
-- 프로젝트를 진행하면서 정리한 가이드라인 (2022.04.05)
-- TS / Next.js / Redux_toolkit / jest / storybook
+- 프로젝트를 진행하면서 정리한 Next.js 가이드라인
+- TS / Next.js / Redux_toolkit / axios / jest / storybook
+- (2022.04.05 초안작성)
 
 # contents
 
@@ -369,6 +370,9 @@ const SomeComponentNeedsCssToJS = (): JSX.Element => {
 - 데이터 관련한 타입을 별도로 관리한다.
 - 요청하는 API데이터 이름뒤에 Type를 붙여서 명명한다.
 - 타입 이름은 파스칼케이스, 속성은 카멜케이스를 사용한다.
+- 상태에 관한 데이터의 경우 아래의 명명규착을 사용한다
+  - Boolean(행위나 상태) : is + 데이터명(명사나 동사)
+  - Boolean(데이터의 유무) : has + 데이터명(명사)
 
 ### 초기화
 
@@ -377,7 +381,7 @@ const SomeComponentNeedsCssToJS = (): JSX.Element => {
 - 카멜케이스로 작성한다.
 
 ```js
-
+//타입 정의
 export type UserType = {
   userIndex: string
   userName: string
@@ -385,6 +389,7 @@ export type UserType = {
   age: number
 }
 
+//데이터 초기화(리덕스 상태)
 const initUser: UserType = {
   userIndex: "USER001"
   userName: "Bruce"
@@ -395,13 +400,13 @@ const initUser: UserType = {
 export type UserStateType = {
   userInfo : UserType
   isLogin : boolean
-  DarkMode : boolean
+  isDarkMode : boolean
 }
 
 const initUserState: UserStateType = {
   userInfo: initUser
   isLogin: false
-  DarkMode: false
+  isDarkMode: false
 };
 
 ```
@@ -410,25 +415,36 @@ const initUserState: UserStateType = {
 
 - Redux toolkit을 사용한다
 - 페이지 별로 Slice를 나눠서 작성한다.
-- 각 슬라이스는 상태 정의, 리듀서, 액션 순으로 작성한다.
+- 각 슬라이스는 리듀서, 액션 순으로 작성한다.
+- 리덕스에 다른 비즈니스 로직은 넣지 않는다. 불가피할 경우 별도 함수로 작성하여 호출한다.
 
-### 초기화
+### Slice - 리듀서
 
-- init + 페이지명 + State로 명명한다
-- 카멜케이스로 작성한다.
+- Slice명은 데이터명 + Slice로 하고, 파스칼 케이스로 작성
+- Reducer 명은 데이터명 + Reducer로 하고, 카멜 케이스로 작성
+- Reducer에 가장 처음은 resetStateReducer를 작성한다.
+- Reducer는 아래의 코드 이외에 작성하지 않는다.
 
 ```js
-import UserType from "../types";
-const initUserState: UserStateType = {
-  userIndex: "USER001"
-  userName: "Bruce"
-  gender: "Male"
-  age: 30
-};
+import { initUserState } from "../types";
+
+export const UserSlice = createSlice({
+  name: "User",
+  initialState: initUserState,
+  reducers: {
+    resetUserStateReducer: () => initUserState,
+
+    userInfoReducer: (state, action) => {
+      state.userInfo = action.payload;
+    },
+    isLoginReducer: (state, action) => {
+      state.isLogin = action.payload;
+    },
+    isDarkModeReducer: (state, action) => {
+      state.isDarkMode = action.payload;
+    },
+  },
+});
 ```
-
-### Slice
-
--
 
 ## Api
